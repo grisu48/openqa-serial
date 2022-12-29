@@ -147,6 +147,7 @@ func cleanFragment(url string) string {
 
 func parseProgramArguments() error {
 	args := os.Args[1:]
+	progname := os.Args[0]
 	n := len(args)
 	if n == 0 {
 		return nil
@@ -159,7 +160,18 @@ func parseProgramArguments() error {
 		}
 		if arg[0] == '-' {
 			if arg == "-h" || arg == "--help" {
-				fmt.Println("help message not yet implemented")
+				fmt.Println("openqa-serial terminal reader")
+				fmt.Println("  Small helper to make the serial terminal better readable")
+				fmt.Println("")
+				fmt.Printf("Usage: %s [OPTIONS] INPUT\n", progname)
+				fmt.Println("OPTIONS")
+				fmt.Println("   -h, --help                                Print help message")
+				fmt.Println("   -n, --no-numbers                          Don't display command numbers")
+				fmt.Println("")
+				fmt.Println("INPUT supports links to openQA jobs and file names")
+				fmt.Println("      You can just point to any openQA job or the serial_terminal.txt (or any other) asset file therein")
+				fmt.Println("")
+				fmt.Println("2022, phoenix - Have a lot of fun!")
 				os.Exit(0)
 			} else if arg == "-n" || arg == "--no-numbers" || arg == "--nonumbers" {
 				cf.Numbers = false
