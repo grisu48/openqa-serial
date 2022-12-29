@@ -90,14 +90,14 @@ func parse(reader io.Reader) ([]Entry, error) {
 
 	// Regex for script_run
 	// echo Gi8yV-$?-
-	re_sr := regexp.MustCompile(";[ ]+echo [a-zA-Z0-9~_]{5}-\\$\\?-.*")
+	re_sr := regexp.MustCompile(`;[ ]+echo [a-zA-Z0-9~_]{5}-\$\?-.*`)
 
 	entry := Entry{}
 	for scanner.Scan() {
 		line := strings.Trim(scanner.Text(), "\n")
 
 		// Are we searching for the matching token?
-		if entry.token != "" && !strings.HasPrefix(line, ">") {
+		if entry.token != "" && !strings.HasPrefix(line, ">") && !strings.Contains(line, "_EOT") && !strings.Contains(line, "EOT_") {
 			i := strings.Index(line, entry.token)
 			if i >= 0 {
 				// Complete entry - Fetch return code
