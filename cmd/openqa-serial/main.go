@@ -257,13 +257,16 @@ func main() {
 		fmt.Printf("%s", entry.Command)
 		fmt.Println()
 
-		// Print also output if not just a line
+		// Print also output if applicable
 		if !entry.Dumb {
-			for _, line := range strings.Split(entry.Output, "\n") {
-				if cf.Numbers {
-					fmt.Print("       ")
+			// Only print output, if it's not empty
+			if strings.TrimSpace(entry.Output) != "" {
+				for _, line := range strings.Split(entry.Output, "\n") {
+					if cf.Numbers {
+						fmt.Print("       ")
+					}
+					fmt.Printf("%s\n", line)
 				}
-				fmt.Printf("%s\n", line)
 			}
 		}
 		if color {
